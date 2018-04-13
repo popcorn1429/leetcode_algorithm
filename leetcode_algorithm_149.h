@@ -1,3 +1,9 @@
+/*Max Points on a Line*/
+/*
+Given n points on a 2D plane, 
+find the maximum number of points that lie on the same straight line.
+*/
+
 #ifndef __leetcode_algorithm_149_h_
 #define __leetcode_algorithm_149_h_
 #include <map>
@@ -19,148 +25,125 @@ struct Point {
     }
 };
 
-class Solution {
-public:
-    int maxPoints(vector<Point>& points) {
-        if (points.size() <= 2)
-            return points.size();
+int gcd(int x, int y) {
+    int _min = x < y ? x : y;
+    int _max = x < y ? y : x;
+    while (_min != 0) {
+        int tmp = _min;
+        _min = _max % _min;
+        _max = tmp;
+    }
 
-        //remove duplicate points
-        distinctPoinsts(points);
+    return _max;
+}
 
-        int maxCount = 0;
-        vector<set<int> >::iterator itr = lines.begin();
-        for (long i = 0; i < points.size() - 1; ++i) {
-            for (long j = i+1; j < points.size(); ++j) {
-                
-                int cnPoints = selectPointsInLine(points, i, j, itr);
-                if (cnPoints > maxCount) {
-                    maxCount = cnPoints;
-                }
+struct Line {
+    int k_y;
+    int k_x;
+    int c_y;
+    int c_x;
+
+    Line(int ky, int kx, int cy) {
+        int kd = gcd(ky, kx);
+        if (kd != 0) {
+            k_y = ky / kd;
+            k_x = kx / kd;
+        }
+        else {
+            if (ky != 0) {
+                k_y = 1;
+                k_x = 0;
+            }
+            else {
+                k_y = 0;
+                k_x = 1;
             }
         }
 
-
-        return maxCount;
+        int cd = gcd(cy, kx);
+        if (cd != 0) {
+            c_y = cy / cd;
+            c_x = kx / cd;
+        }
+        else {
+            if (cy != 0) {
+                c_y = 1;
+                c_x = 0;
+            }
+            else {
+                c_y = 0;
+                c_x = 1;
+            }
+        }
     }
 
-    int selectPointsInLine(const vector<Point>& points, int i, int j, vector<set<int> >::iterator& itr) {
-        for (itr = lines.begin(); itr != lines.end(); ++itr) {
-            if (itr->find(i) != itr->end()) {
-                if (itr->find(j) != itr->end()) {
-                    return itr->size();
-                }
-                else {
-                    if (checkPointInLine(points, j, *itr)) {
-                        itr->insert(j);
+    bool operator<(const Line& l) const {
+        bool bRet = true;
+        do {
+            if (k_x != l.k_x) {
+                bRet = (k_x < l.k_x);
+                break;
+            }
 
-                        //for test...
-                        cout << "one line : \n";
-                        for (auto iter = itr->cbegin(); iter != itr->cend(); ++iter) {
-                            cout << points[*iter] << ",";
-                        }
-                        cout << endl;
+            if (k_y != l.k_y) {
+                bRet = (k_y < l.k_y);
+                break;
+            }
 
-                        return itr->size();
+            if (c_x != l.c_x) {
+                bRet = (c_x < l.c_x);
+                break;
+            }
+
+            bRet = (c_y < l.c_y);
+        } while (0);
+
+        return bRet;
+    }
+
+    bool pointInLine(const Point& point) const {
+        return k_y*point.x*c_x + c_y*k_x == k_x*c_x*point.y;
+    }
+};
+
+
+class Solution {
+public:
+    int maxPoints(vector<Point>& points) {
+        map<Line, int> results;
+
+        for (auto itr = points.begin(); itr != points.end(); ++itr) {
+            for (auto iter = itr + 1; iter != points.end(); ++iter) {
+                if (!samePoint(*iter, *itr)) {
+                    Line l(iter->y - itr->y, iter->x - itr->x, iter->x*itr->y - itr->x*iter->y);
+                    if (results.find(l) != results.end()) {
+                        results.insert(make_pair(l, 0));
                     }
                 }
             }
         }
 
-        lines.push_back({ i, j });
-        itr = lines.begin();
-        return 2;
-    }
+        if (results.empty())
+            return points.size();
 
-    bool checkPointInLine(const vector<Point>& points, int j, const set<int>& line) {
-        int first = *line.begin();
-        int second = *line.rbegin();
-        
-        double deltaX1 = points[first].x - points[second].x;
-        double deltaY1 = points[first].y - points[second].y;
-
-        double deltaX2 = points[first].x - points[j].x;
-        double deltaY2 = points[first].y - points[j].y;
-
-        return (deltaX1 * deltaY2 == deltaY1 * deltaX2);
-    }
-
-    void distinctPoinsts(vector<Point>& points) {
-        vector<Point> newPoints;
-        for (auto itr = points.begin(); itr != points.end(); ++itr) {
-            if (findPoint(newPoints, *itr) == newPoints.end()) {
-                newPoints.push_back(*itr);
+        for (auto iter = points.begin(); iter != points.end(); ++iter) {
+            for (auto itr = results.begin(); itr != results.end(); ++itr) {
+                if (itr->first.pointInLine(*iter))
+                    ++itr->second;
             }
         }
 
-        points.swap(newPoints);
-    }
-
-    auto findPoint(vector<Point>& points, const Point& p) -> decltype(points.begin()) {
-        for (auto itr = points.begin(); itr != points.end(); ++itr) {
-            if (itr->x == p.x && itr->y == p.y)
-                return itr;
-        }
-        return points.end();
-    }
-
-
-    //for test...
-    void parsePoints(vector<Point>& points, const char* src) {
-        const char* cur = src;
-        bool firstNum = true;
-        int  first = 0;
-        int  second = 0;
-        while (*cur != '\0') {
-            if ('[' == *cur) {
-                firstNum = true;
-                ++cur;
-            }
-            else if (',' == *cur) {
-                if (firstNum) {
-                    firstNum = false;
-                }
-                else {
-                    firstNum = true;
-                }
-                ++cur;
-            }
-            else if (']' != *cur) {
-                if (firstNum) {
-                    first = parseNumber(cur);
-                }
-                else {
-                    second = parseNumber(cur);
-                    points.push_back(Point(first, second));
-                }
-            }
-            else {
-                ++cur;
-            }
-        }
-    }
-
-    int parseNumber(const char*& cur) {
-        bool negative = false;
-        if ('-' == *cur) {
-            negative = true;
-            ++cur;
-        }
-        
-        int num = 0;
-        while (isdigit(*cur)) {
-            num *= 10;
-            num += *cur - '0';
-            ++cur;
+        int iMaxPoints = 0;
+        for (auto itr = results.begin(); itr != results.end(); ++itr) {
+            if (iMaxPoints < itr->second)
+                iMaxPoints = itr->second;
         }
 
-        if (negative)
-            num = -num;
-
-        return num;
+        return iMaxPoints;
     }
 
-private:
-    vector<set<int> > lines;
+    bool samePoint(const Point& _first, const Point& _second) const {
+        return _first.x == _second.x && _first.y == _second.y;
+    }
 };
 #endif /*__leetcode_algorithm_149_h_*/
