@@ -25,87 +25,114 @@ struct Point {
     }
 };
 
-int gcd(int x, int y) {
-    int _min = x < y ? x : y;
-    int _max = x < y ? y : x;
+int abs(int x) {
+    return x < 0 ? -x : x;
+}
+
+long gcd(long x, long y) {
+    if (x == 0 || y == 0) {
+        return 1;
+    }
+
+    long _min = x < y ? x : y;
+    long _max = x < y ? y : x;
     while (_min != 0) {
         int tmp = _min;
         _min = _max % _min;
         _max = tmp;
     }
 
-    return _max;
+    return abs(_max);
 }
 
 struct Line {
-    int k_y;
-    int k_x;
-    int c_y;
-    int c_x;
+    long long x;
+    long long y; //why long long ,not int or long?
+                 //because y would be (int*int-int*int),and maybe int is quite big
+                 //and sometimes, sizeof(long) == sizeof(int) == 4
+                 //use long long is safer.
+    //dy/dx presents k
+    int dy;
+    int dx;
 
-    Line(int ky, int kx, int cy) {
-        int kd = gcd(ky, kx);
-        if (kd != 0) {
-            k_y = ky / kd;
-            k_x = kx / kd;
+    Line(int a, int b, int c, int d)
+    {
+        dy = d - b;
+        dx = c - a;
+
+        if (dx == 0) {
+            //vertical line : x = a
+            x = a;
+            y = 0;
+            dy = 1;
+        }
+        else if (0 == dy) {
+            //line : y = b
+            x = 1;
+            y = b;
+            dx = 1;
         }
         else {
-            if (ky != 0) {
-                k_y = 1;
-                k_x = 0;
+            //line : y = kx + b
+            //k = dy/dx, b = (c*b - d*a)/(c - a) = y/x
+            if (dy < 0) {
+                dy = -dy;
+                dx = -dx;
             }
-            else {
-                k_y = 0;
-                k_x = 1;
-            }
-        }
 
-        int cd = gcd(cy, kx);
-        if (cd != 0) {
-            c_y = cy / cd;
-            c_x = kx / cd;
-        }
-        else {
-            if (cy != 0) {
-                c_y = 1;
-                c_x = 0;
+            int tmp = static_cast<int>(gcd(dy, dx));
+            dy /= tmp;
+            dx /= tmp;
+
+            y = c*b - static_cast<long long>(d)*a;
+            x = c - a;
+            if (0 == y) {
+                x = 1;
             }
-            else {
-                c_y = 0;
-                c_x = 1;
+            else{
+                if (y < 0) {
+                    y = -y;
+                    x = -x;
+                }
+
+                long temp = gcd(y, x);
+                y /= temp;
+                x /= temp;
             }
         }
     }
 
     bool operator<(const Line& l) const {
-        bool bRet = true;
         do {
-            if (k_x != l.k_x) {
-                bRet = (k_x < l.k_x);
-                break;
-            }
+            if (x != l.x)
+                return x < l.x;
 
-            if (k_y != l.k_y) {
-                bRet = (k_y < l.k_y);
-                break;
-            }
+            if (y != l.y)
+                return y < l.y;
 
-            if (c_x != l.c_x) {
-                bRet = (c_x < l.c_x);
-                break;
-            }
+            if (dx != l.dx)
+                return dx < l.dx;
 
-            bRet = (c_y < l.c_y);
+            return dy < l.dy;
         } while (0);
-
-        return bRet;
     }
 
     bool pointInLine(const Point& point) const {
-        return k_y*point.x*c_x + c_y*k_x == k_x*c_x*point.y;
+        if (dy == 0) {
+            return point.y == y;
+        }
+        else if (dx == 0) {
+            return point.x == x;
+        }
+        else {
+            return x*dy*point.x + dx*y == x*dx*point.y;
+        }
+    }
+
+    friend ostream& operator<<(ostream& o, const Line& line) {
+        return o << "k:" << line.dy << "/" << line.dx << ",b:" << line.y << "/" << line.x;
     }
 };
-
 
 class Solution {
 public:
@@ -114,9 +141,10 @@ public:
 
         for (auto itr = points.begin(); itr != points.end(); ++itr) {
             for (auto iter = itr + 1; iter != points.end(); ++iter) {
-                if (!samePoint(*iter, *itr)) {
-                    Line l(iter->y - itr->y, iter->x - itr->x, iter->x*itr->y - itr->x*iter->y);
-                    if (results.find(l) != results.end()) {
+                if (!samePoint(*itr, *iter)) {
+                    Line l(itr->x, itr->y, iter->x, iter->y);
+                    //cout << "line:" << l << endl;
+                    if (results.find(l) == results.end()) {
                         results.insert(make_pair(l, 0));
                     }
                 }
