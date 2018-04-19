@@ -1,3 +1,17 @@
+/*
+Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*'.
+
+'?' Matches any single character.
+'*' Matches any sequence of characters (including the empty sequence).
+The matching should cover the entire input string (not partial).
+
+Note:
+
+s could be empty and contains only lowercase letters a-z.
+p could be empty and contains only lowercase letters a-z, and characters like ? or *.
+
+*/
+
 #ifndef __leetcode_algorithm_44_h__
 #define __leetcode_algorithm_44_h__
 #include <string>
@@ -9,93 +23,45 @@ using namespace std;
 
 class Solution {
 public:
-    enum class ExprType {
-        Flexable,
-        Fixed_Length,
-        Precise_Content
-    };
-
-    struct ExprNode {
-        ExprType    type;
-        size_t      length;
-        char*       expr;
-
-        ExprNode() : type(ExprType::Flexable), length(0), expr(nullptr) { }
-        ExprNode(size_t s) : type(ExprType::Fixed_Length), length(s), expr(nullptr) { }
-        ExprNode(const char* p, size_t s) : type(ExprType::Precise_Content), length(s) {
-            expr = new char[s + 1];
-            _memccpy(expr, p, 0, s);
-            expr[s] = '\0';
-        }
-
-        ExprNode(const ExprNode& node) : type(node.type), length(node.length) {
-            if (type == ExprType::Precise_Content) {
-                expr = new char[node.length + 1];
-                _memccpy(expr, node.expr, 0, node.length);
-                expr[length] = '\0';
-            }
-            else {
-                expr = nullptr;
-            }
-        }
-
-        ~ExprNode() {
-            if (nullptr != expr) {
-                delete[] expr;
-                expr = nullptr;
-            }
-        }
-    };
-
-    size_t parseRegularExpr(const string& p) {
-        const char* src = p.c_str();
-        while (*src != '\0') {
-            if (*src == '*') {
-                nodes.push_back(ExprNode());
-                while (*src == '*')
-                    ++src;
-            }
-            else if (*src == '?') {
-                size_t s = 0;
-                while (*src == '?') {
-                    ++src;
-                    ++s;
-                }
-                nodes.push_back(ExprNode(s));
-            }
-            else {
-                size_t s = 0;
-                while (*src != '\0' && *src != '?' && *src != '*') {
-                    ++src;
-                    ++s;
-                }
-                nodes.push_back(ExprNode(src - s, s));
-            }
-        }
-        return nodes.size();
+    bool isMatch(string s, string p)
+    {
+        return isMatch(s.c_str(), p.c_str());
     }
 
-    void printNodes() {
-        for (const ExprNode& node : nodes) {
-            cout << "{ ";
-            switch (node.type)
-            {
-            case ExprType::Flexable:
-            cout << "*" << " }\n";
-            break;
-            case ExprType::Fixed_Length:
-            cout << "?[" << node.length << "] }\n";
-            break;
-            case ExprType::Precise_Content:
-            cout << node.expr << " }\n";
-            break;
-            default:
-            break;
+    bool isMatch(const char* s, const char* p) {
+        bool b = false;
+        const char* start_s = nullptr;
+        const char* start_p = nullptr;
+        while (*s) {
+            if (*s == *p || *p == '?') {
+                ++s;
+                ++p;
+                continue;
             }
-        }
-        cout << endl;
-    }
 
+            if (*p == '*') {
+                ++p;
+                start_p = p;
+                start_s = s;
+                continue;
+            }
+
+            if (start_s != nullptr && (*start_s != '\0')) {
+                ++start_s;
+                s = start_s;
+                p = start_p;
+                continue;
+            }
+            
+            return false;
+        }
+
+        while (*p == '*')
+            ++p;
+
+        return *p == '\0';
+    }
+    /*
     bool isMatch(const char* s, const char* p)
     {
         const char* star = NULL;
@@ -121,81 +87,11 @@ public:
         while (*p == '*'){ p++; }
 
         return !*p;
-        /*
-        parseRegularExpr(p);
-        printNodes();
-
-        //return true;
-        return isMatchStrictly(s.c_str(), nodes.cbegin());
-        */
+        
     }
-
-    bool isMatchStrictly(const char* src, vector<ExprNode>::const_iterator itr) {
-        if (itr == nodes.cend()) {
-            return *src == '\0';
-        }
-
-        if (itr->type == ExprType::Flexable) {
-            return isMatchLoosely(src, itr + 1);
-        }
-        else if (itr->type == ExprType::Fixed_Length) {
-            size_t s = itr->length;
-            while (s > 0 && *src != '\0') {
-                ++src;
-                --s;
-            }
-
-            if (s != 0)
-                return false;
-            else
-                return isMatchStrictly(src, itr + 1);
-        }
-        else {
-            if (strncmp(src, itr->expr, itr->length) != 0) {
-                return false;
-            }
-            else {
-                return isMatchStrictly(src + itr->length, itr + 1);
-            }
-        }
-    }
-
-    bool isMatchLoosely(const char* src, vector<ExprNode>::const_iterator itr) {
-        if (itr == nodes.cend()) {
-            return true;
-        }
-
-        if (itr->type == ExprType::Flexable) {
-            return isMatchLoosely(src, itr + 1);
-        }
-        else if (itr->type == ExprType::Fixed_Length) {
-            size_t s = itr->length;
-            while (s > 0 && *src != '\0') {
-                ++src;
-                --s;
-            }
-
-            if (s != 0)
-                return false;
-            else
-                return isMatchLoosely(src, itr + 1);
-        }
-        else {
-            const char* found = strstr(src, itr->expr);
-            while (found != nullptr) {
-                if (isMatchStrictly(found + itr->length, itr + 1))
-                    return true;
-                else
-                    found = strstr(found + 1, itr->expr);
-            }
-
-            return false;
-        }
-    }
-
-    
+    */
 private:
-    vector<ExprNode>  nodes;
+
 };
 
 #endif
