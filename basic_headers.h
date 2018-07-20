@@ -9,6 +9,7 @@
 #include <map>
 #include <list>
 #include <ctime>
+#include <algorithm>
 using namespace std;
 
 #endif /*_basic_headers_h_*/
