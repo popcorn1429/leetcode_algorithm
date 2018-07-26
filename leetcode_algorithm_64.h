@@ -22,6 +22,11 @@ public:
         if (0 == n)
             return 0;
 
+        for (int i = m - 2; i >= 0; --i)
+            grid[i][n - 1] += grid[i + 1][n - 1];
+        for (int j = n - 2; j >= 0; --j)
+            grid[m - 1][j] += grid[m - 1][j + 1];
+
         for (int i = m - 2; i >= 0; --i) {
             for (int j = n - 2; j >= 0; --j) {
                 grid[i][j] += min(getValue(grid, m, n, i+1, j),
@@ -34,7 +39,7 @@ public:
 
     int getValue(const vector<vector<int>>& grid, size_t m, size_t n, int i, int j) {
         if (m <= i || n <= j)
-            return 0;
+            return INT_MAX;
         else
             return grid[i][j];
     }
