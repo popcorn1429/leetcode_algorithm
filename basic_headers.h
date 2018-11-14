@@ -1,6 +1,8 @@
 #ifndef _basic_headers_h_
 #define _basic_headers_h_
 
+#include <cstring>
+#include <cctype>
 #include <vector>
 #include <string>
 #include <iostream>
