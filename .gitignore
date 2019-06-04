@@ -8,3 +8,5 @@
 *.vcxproj
 *.filters
 *.user
+/Debug/leetcode_algorithm_git.log
+/Debug/leetcode_algorithm_git.vcxprojAssemblyReference.cache
