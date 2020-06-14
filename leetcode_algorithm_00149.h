@@ -4,8 +4,8 @@ Given n points on a 2D plane,
 find the maximum number of points that lie on the same straight line.
 */
 
-#ifndef __leetcode_algorithm_149_h_
-#define __leetcode_algorithm_149_h_
+#ifndef __leetcode_algorithm_00149_h__
+#define __leetcode_algorithm_00149_h__
 #include <map>
 #include <set>
 #include <vector>
@@ -174,4 +174,4 @@ public:
         return _first.x == _second.x && _first.y == _second.y;
     }
 };
-#endif /*__leetcode_algorithm_149_h_*/
+#endif /*__leetcode_algorithm_00149_h__*/
