@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_50_h__
-#define __leetcode_algorithm_50_h__
+#ifndef __leetcode_algorithm_00050_h__
+#define __leetcode_algorithm_00050_h__
 
 class Solution {
 public:
