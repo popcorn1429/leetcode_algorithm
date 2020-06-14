@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_61_h__
-#define __leetcode_algorithm_61_h__
+#ifndef __leetcode_algorithm_00061_h__
+#define __leetcode_algorithm_00061_h__
 
 
 struct ListNode {
