@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_25_h__
-#define __leetcode_algorithm_25_h__
+#ifndef __leetcode_algorithm_00025_h__
+#define __leetcode_algorithm_00025_h__
 
 struct ListNode {
     int val;
