@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_73_h__
-#define __leetcode_algorithm_73_h__
+#ifndef __leetcode_algorithm_00073_h__
+#define __leetcode_algorithm_00073_h__
 #include "basic_headers.h"
 
 class Solution {
@@ -65,4 +65,4 @@ public:
     }
 };
 
-#endif /*__leetcode_algorithm_73_h__*/
+#endif /*__leetcode_algorithm_00073_h__*/
