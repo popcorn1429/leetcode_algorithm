@@ -15,8 +15,8 @@ There are two ways to reach the bottom-right corner:
 2. Down -> Down -> Right -> Right
 
 */
-#ifndef _leetcode_algorithm_63_h_
-#define _leetcode_algorithm_63_h_
+#ifndef __leetcode_algorithm_00063_h__
+#define __leetcode_algorithm_00063_h__
 #include "basic_headers.h"
 
 class Solution {
@@ -80,4 +80,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_63_h_*/
+#endif /*__leetcode_algorithm_00063_h__*/
