@@ -6,8 +6,8 @@ No.47:
     Given a collection of numbers that might contain duplicates, return all possible unique permutations.
 */
 
-#ifndef _leetcode_algorithm_46_47_h_
-#define _leetcode_algorithm_46_47_h_
+#ifndef _leetcode_algorithm_00046_47_h_
+#define _leetcode_algorithm_00046_47_h_
 
 #include "basic_headers.h"
 
@@ -56,4 +56,4 @@ public:
 };
 
 
-#endif /*_leetcode_algorithm_46_47_h_*/
+#endif /*_leetcode_algorithm_00046_47_h_*/
