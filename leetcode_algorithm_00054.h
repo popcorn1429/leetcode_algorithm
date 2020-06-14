@@ -12,8 +12,8 @@ Example:
   Output: [1,2,3,6,9,8,7,4,5]
 */
 
-#ifndef _leetcode_algorithm_54_h_
-#define _leetcode_algorithm_54_h_
+#ifndef _leetcode_algorithm_00054_h_
+#define _leetcode_algorithm_00054_h_
 #include "basic_headers.h"
 
 class Solution {
@@ -74,4 +74,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_54_h_*/
+#endif /*_leetcode_algorithm_00054_h_*/
