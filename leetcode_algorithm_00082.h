@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_82_h__
-#define __leetcode_algorithm_82_h__
+#ifndef __leetcode_algorithm_00082_h__
+#define __leetcode_algorithm_00082_h__
 
 #include "basic_headers.h"
 
@@ -100,4 +100,4 @@ ostream &operator<<(ostream &o, const ListNode *head) {
     return o;
 }
 
-#endif /*__leetcode_algorithm_82_h__*/
+#endif /*__leetcode_algorithm_00082_h__*/
