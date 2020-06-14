@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_86_h__
-#define __leetcode_algorithm_86_h__
+#ifndef __leetcode_algorithm_00086_h__
+#define __leetcode_algorithm_00086_h__
 /*
  * Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
  * You should preserve the original relative order of the nodes in each of the two partitions.
@@ -62,4 +62,4 @@ public:
 };
 
 
-#endif /*__leetcode_algorithm_86_h__*/
+#endif /*__leetcode_algorithm_00086_h__*/
