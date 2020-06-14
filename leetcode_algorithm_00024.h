@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_24_h__
-#define __leetcode_algorithm_24_h__
+#ifndef __leetcode_algorithm_00024_h__
+#define __leetcode_algorithm_00024_h__
 
 /**
 * Definition for singly-linked list.
