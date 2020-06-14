@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_9_h_
-#define 
+#ifndef _leetcode_algorithm_00009_h_
+#define _leetcode_algorithm_00009_h_
 
 #include <iostream>
 using namespace std;
@@ -16,4 +16,4 @@ bool isPalindrome(int x) {
     return (m == x || m == -x);
 }
 
-#endif /*_leetcode_algorithm_9_h_*/
+#endif /*_leetcode_algorithm_00009_h_*/
