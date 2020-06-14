@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_37_h__
-#define __leetcode_algorithm_37_h__
+#ifndef __leetcode_algorithm_00037_h__
+#define __leetcode_algorithm_00037_h__
 #include <vector>
 #include <set>
 #include <iostream>
@@ -43,10 +43,10 @@ private:
         }
     }
 
-    //ʹ�ÿɿ��Ĺ�������ڵľ�����д���
-    //������ȫ����⣬�򷵻�1
-    //�������ì�ܣ���β��Ϸ����ò��������������-1
-    //�����ì�ܣ����ǿ����еĹ��򼯽���������⣬��Ȼ�пո��򷵻�0
+    //使用可靠的规则对现在的局面进行处理
+    //如果最后全部求解，则返回1
+    //如果存在矛盾（入参不合法，得不到结果），返回-1
+    //如果无矛盾，但是靠现有的规则集解决不了问题，依然有空格，则返回0
     int try_to_solve(vector<vector<char>>& board, vector<vector<set<char>>>& sudoku) {
         bool changed = false;
         do {
@@ -91,7 +91,7 @@ private:
 
 
 private:
-    //��һ���ո��ӵı�ѡֵ���Ͻ�ʣһ��Ԫ��ʱ����������Ӿ���ȷ����д���ֵ�ˡ�
+    //当一个空格子的备选值集合仅剩一个元素时，则这个格子就能确定填写这个值了。
     bool update_sudoku(vector<vector<char>>& board, vector<vector<set<char>>>& sudoku) {
         bool updated = false;
         for (int i = 0; i < 9; ++i) {
@@ -106,10 +106,10 @@ private:
     }
 
 
-    //��������ͬ��/ͬ��/ͬ�Ź������Ժ���ͬ�飩��ĳ�����Ӵ���ȷ��ֵ c�������ո��ӵı�ѡֵ�����о�Ҫ�ų� c
-    //�쳣 -1
-    //û���κ��޸� 0
-    //�����޸� 1
+    //基本规则：同行/同列/同九宫区（以后简称同组），某个格子存在确定值 c，其他空格子的备选值集合中就要排除 c
+    //异常 -1
+    //没有任何修改 0
+    //存在修改 1
     int solve_by_rule_1(vector<vector<set<char>>>& sudoku) {
         bool removed = false;
         for (int i = 0; i < 9; ++i) {
@@ -126,10 +126,10 @@ private:
         return removed ? 1 : 0;
     }
 
-    //���ͬ������пո����У�ֻ��һ���ո��Ӻ��б�ѡֵc����ô����ո��ӱ�����c
-    //�쳣    -1
-    //���޸�  0
-    //�и���   1
+    //如果同组的所有空格子中，只有一个空格子含有备选值c，那么这个空格子必须填c
+    //异常    -1
+    //无修改  0
+    //有更新   1
     int solve_by_rule_2(vector<vector<set<char>>>& sudoku) {
         bool verified = false;
         for (int i = 0; i < 9; ++i) {
@@ -157,9 +157,9 @@ private:
     }
 
 private:
-    //�쳣 -1
-    //û���κ��޸� 0
-    //�����޸� 1
+    //异常 -1
+    //没有任何修改 0
+    //存在修改 1
     int remove_potential_digits(vector<vector<set<char>>>& sudoku, int row, int col) {
         char c = *(sudoku[row][col].begin());
         //same row
@@ -218,9 +218,9 @@ private:
         return modified ? 1 : 0;
     }
 
-    //�쳣   -1
-    //��Ψһ 0
-    //Ψһ   1
+    //异常   -1
+    //不唯一 0
+    //唯一   1
     int unique_potential_digit(vector<vector<set<char>>>& sudoku, int row, int col, char digit) {
         //same row
         bool unique = true;
@@ -286,12 +286,12 @@ private:
     }
 
     
-    //֮ǰ�Ĺ�����ֳ���֮����û����ȫ�����
-    //��������������ִ󷨣��ӿո��ӵı�ѡ����ѡ��һ�������⣬Ȼ���ٴ�����ǰ��Ĺ�����⣬���û�г���ì���ҽ������Ϊ�ɹ���⡣
-    //���û��ì�ܣ����ǻ���û��ȫ�������������ʣ�µĿո�������һ�����ٲ¡��ظ�������̡�
-    //�������ì�ܣ���������Ĳµ����֣���һ����ѡ�����ٲ¡�
-    //������б�ѡ������һ�飬����ì�ܡ��Ǿ��˵������һ���ո��ӣ����²¡�
-    //˵���ˣ�һ���ݹ�Ĺ��̡�
+    //之前的规则各种尝试之后还是没有完全解决？
+    //试试这个，猜数字大法，从空格子的备选数中选择一个当做解，然后再次利用前面的规则解题，如果没有出现矛盾且解答，则认为成功求解。
+    //如果没有矛盾，但是还是没有全部解出，继续从剩下的空格子中找一个，再猜。重复这个过程。
+    //如果出现矛盾，回退最近的猜的数字，换一个备选的数再猜。
+    //如果所有备选都猜了一遍，还是矛盾。那就退到更早的一个空格子，重新猜。
+    //说白了，一个递归的过程。
     bool last_rule(vector<vector<char>>& board, vector<vector<set<char>>>& sudoku) {
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
