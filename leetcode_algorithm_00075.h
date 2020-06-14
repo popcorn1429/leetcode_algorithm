@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_75_h__
-#define __leetcode_algorithm_75_h__
+#ifndef __leetcode_algorithm_00075_h__
+#define __leetcode_algorithm_00075_h__
 
 #include "basic_headers.h"
 
@@ -49,4 +49,4 @@ public:
 };
 
 
-#endif /*__leetcode_algorithm_75_h__*/
+#endif /*__leetcode_algorithm_00075_h__*/
