@@ -1,14 +1,4 @@
-/*
-No.46:
-    Given a collection of distinct integers, return all possible permutations.
-&
-No.47:
-    Given a collection of numbers that might contain duplicates, return all possible unique permutations.
-*/
-
-#ifndef _leetcode_algorithm_00046_47_h_
-#define _leetcode_algorithm_00046_47_h_
-
+#pragma once
 #include "basic_headers.h"
 
 class Solution {
@@ -17,7 +7,7 @@ public:
         vector<vector<int>>::size_type cnt = 1;
         for (vector<int>::size_type i = 1; i <= nums.size(); ++i)
             cnt *= i;
-        
+
         vector<vector<int>> result;
         result.reserve(cnt);
 
@@ -32,7 +22,7 @@ public:
             result.back().reserve(nums.size());
             return 1;
         }
-        
+
         set<int> duplicates;
         vector<vector<int>>::size_type cnt = 0;
         for (auto i = pos; i < nums.size(); ++i) {
@@ -54,6 +44,3 @@ public:
         return cnt;
     }
 };
-
-
-#endif /*_leetcode_algorithm_00046_47_h_*/
