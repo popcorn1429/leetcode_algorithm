@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_19_h__
-#define __leetcode_algorithm_19_h__
+#ifndef __leetcode_algorithm_00019_h__
+#define __leetcode_algorithm_00019_h__
 
 
 /**
