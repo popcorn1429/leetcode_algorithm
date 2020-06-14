@@ -6,10 +6,10 @@ Input:
  [4,2,1]
 ]
 Output: 7
-Explanation: Because the path 1¡ú3¡ú1¡ú1¡ú1 minimizes the sum.
+Explanation: Because the path 1Â¡Ãº3Â¡Ãº1Â¡Ãº1Â¡Ãº1 minimizes the sum.
 */
-#ifndef _leetcode_algorithm_64_h_
-#define _leetcode_algorithm_64_h_
+#ifndef _leetcode_algorithm_00064_h_
+#define _leetcode_algorithm_00064_h_
 #include "basic_headers.h"
 
 class Solution {
@@ -45,4 +45,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_64_h_*/
+#endif /*_leetcode_algorithm_00064_h_*/
