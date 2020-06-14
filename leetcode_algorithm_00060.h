@@ -16,8 +16,8 @@ Example:
   Output: "213"
 */
 
-#ifndef _leetcode_algorithm_60_h_
-#define _leetcode_algorithm_60_h_
+#ifndef _leetcode_algorithm_00060_h_
+#define _leetcode_algorithm_00060_h_
 #include "basic_headers.h"
 
 class Solution {
@@ -65,4 +65,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_60_h_*/
+#endif /*_leetcode_algorithm_00060_h_*/
