@@ -5,8 +5,8 @@ Each element in the array represents your maximum jump length at that position.
 Determine if you are able to reach the last index.
 */
 
-#ifndef _leetcode_algorithm_55_h_
-#define _leetcode_algorithm_55_h_
+#ifndef _leetcode_algorithm_00055_h_
+#define _leetcode_algorithm_00055_h_
 #include "basic_headers.h"
 
 class Solution {
@@ -37,4 +37,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_55_h_*/
+#endif /*_leetcode_algorithm_00055_h_*/
