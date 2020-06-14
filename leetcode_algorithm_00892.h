@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_892_h__
-#define __leetcode_algorithm_892_h__
+#ifndef __leetcode_algorithm_00892_h__
+#define __leetcode_algorithm_00892_h__
 
 #include "basic_headers.h"
 
@@ -34,4 +34,4 @@ public:
     }
 };
 
-#endif /*__leetcode_algorithm_892_h__*/
+#endif /*__leetcode_algorithm_00892_h__*/
