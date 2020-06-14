@@ -15,8 +15,8 @@ Output: 28
 
 */
 
-#ifndef _leetcode_algorithm_62_h_
-#define _leetcode_algorithm_62_h_
+#ifndef _leetcode_algorithm_00062_h_
+#define _leetcode_algorithm_00062_h_
 #include "basic_headers.h"
 class Solution {
 public:
@@ -78,4 +78,4 @@ public:
 };
 
 
-#endif /*_leetcode_algorithm_62_h_*/
+#endif /*_leetcode_algorithm_00062_h_*/
