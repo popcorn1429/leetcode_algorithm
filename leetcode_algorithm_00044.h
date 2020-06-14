@@ -12,8 +12,8 @@ p could be empty and contains only lowercase letters a-z, and characters like ? 
 
 */
 
-#ifndef __leetcode_algorithm_44_h__
-#define __leetcode_algorithm_44_h__
+#ifndef __leetcode_algorithm_00044_h__
+#define __leetcode_algorithm_00044_h__
 #include <string>
 #include <cstdio>
 #include <vector>
