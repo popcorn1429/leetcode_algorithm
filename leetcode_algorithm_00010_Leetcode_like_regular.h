@@ -1,5 +1,5 @@
-#ifndef __LEETCODE_LIKE_REGULAR_H__
-#define __LEETCODE_LIKE_REGULAR_H__
+#ifndef __leetcode_algorithm_00010_leetcode_like_h__
+#define __leetcode_algorithm_00010_leetcode_like_h__
 #include <list>
 #include <string>
 using std::string;
@@ -67,7 +67,7 @@ bool match(const string& src, size_t curPos, const list<RegularSegment>& segs, l
     auto nextItr = curItr;
     
     if (!curItr->isTensile()) {
-        //µ±Ç°Ïî±ØĞë²ÎÓëÆ¥Åä
+        //å½“å‰é¡¹å¿…é¡»å‚ä¸åŒ¹é…
         if (charMatch(src.at(curPos), curItr->expr())) {
             ++nextItr;
             return match(src, ++curPos, segs, nextItr);
@@ -77,12 +77,12 @@ bool match(const string& src, size_t curPos, const list<RegularSegment>& segs, l
         }
     }
     else {
-        //µ±Ç°Ïî¶¯Ì¬Æ¥Åä£¨Ìø¹ı£¬»òÕßÆ¥Åä£¬Æ¥ÅäÊ±¿ÉÒÔÁ¬ĞøÆ¥Åä£©
+        //å½“å‰é¡¹åŠ¨æ€åŒ¹é…ï¼ˆè·³è¿‡ï¼Œæˆ–è€…åŒ¹é…ï¼ŒåŒ¹é…æ—¶å¯ä»¥è¿ç»­åŒ¹é…ï¼‰
         ++nextItr;
-        if (match(src, curPos, segs, nextItr)) //µ±Ç°Ïî²»Æ¥Åä£¬Ö±½ÓÆ¥ÅäÏÂÒ»Ïî
+        if (match(src, curPos, segs, nextItr)) //å½“å‰é¡¹ä¸åŒ¹é…ï¼Œç›´æ¥åŒ¹é…ä¸‹ä¸€é¡¹
             return true;
         else {
-            //µ±Ç°Ïî²ÎÓëÆ¥Åä£¨ÖÁÉÙÒ»¸ö×Ö·û£©£¬È»ºóÆ¥ÅäºóÃæµÄÏî
+            //å½“å‰é¡¹å‚ä¸åŒ¹é…ï¼ˆè‡³å°‘ä¸€ä¸ªå­—ç¬¦ï¼‰ï¼Œç„¶ååŒ¹é…åé¢çš„é¡¹
             while ((nextPos < src.size())
                 && charMatch(src.at(nextPos), curItr->expr())) {
                 bool ret = match(src, nextPos + 1, segs, nextItr);
