@@ -4,15 +4,15 @@ Each element in the array represents your maximum jump length at that position.
 Your goal is to reach the last index in the minimum number of jumps.
 */
 
-#ifndef __leetcode_algorithm_45_h__
-#define __leetcode_algorithm_45_h__
+#ifndef __leetcode_algorithm_00045_h__
+#define __leetcode_algorithm_00045_h__
 #include <vector>
 using namespace std;
 
 class Solution {
 public:
-    //Õâ¸ö½â·¨ÊÇ¿´ÁË±ğÈËµÄ´ğ°¸£¬È»ºóÒ»·¬ÔÄ¶ÁÀí½âÖ®ºó³­µÄ
-    //ĞèÒª¸ãÃ÷°×ÄÇ¸öifµÄÒâË¼£¬²ÅÄÜÀí½âÕâÑùÎªÊ²Ã´ÊÇÕıÈ·µÄ
+    //è¿™ä¸ªè§£æ³•æ˜¯çœ‹äº†åˆ«äººçš„ç­”æ¡ˆï¼Œç„¶åä¸€ç•ªé˜…è¯»ç†è§£ä¹‹åæŠ„çš„
+    //éœ€è¦ææ˜ç™½é‚£ä¸ªifçš„æ„æ€ï¼Œæ‰èƒ½ç†è§£è¿™æ ·ä¸ºä»€ä¹ˆæ˜¯æ­£ç¡®çš„
     int jump(vector<int>& nums) {
         int steps = 0;
         int laststepmax = 0;
