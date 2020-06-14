@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_6_h_
-#define _leetcode_algorithm_6_h_
+#ifndef _leetcode_algorithm_00006_h_
+#define _leetcode_algorithm_00006_h_
 
 #include <string>
 #include <iostream>
@@ -46,4 +46,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_6_h_*/
+#endif /*_leetcode_algorithm_00006_h_*/
