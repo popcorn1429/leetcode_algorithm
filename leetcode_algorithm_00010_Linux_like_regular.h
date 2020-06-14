@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_00100_linux_like_h__
-#define __leetcode_algorithm_00100_linux_like_h__
+#ifndef __leetcode_algorithm_00010_linux_like_h__
+#define __leetcode_algorithm_00010_linux_like_h__
 #include <string>
 #include <list>
 using std::string;
