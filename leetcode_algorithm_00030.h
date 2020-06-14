@@ -1,9 +1,9 @@
-#ifndef __leetcode_algorithm_30_h__
-#define __leetcode_algorithm_30_h__
+#ifndef __leetcode_algorithm_00030_h__
+#define __leetcode_algorithm_00030_h__
 #include <string>
 #include <vector>
 #include <set>
-#include<random>    //Ëæ»úÊı
+#include<random>    //éšæœºæ•°
 using namespace std;
 
 class Solution {
@@ -111,7 +111,7 @@ public:
                 const char* word = words[i].c_str();
                 if (compare(word, str + pos, len)) {
                     matched = true;
-                    record[i] = true; //ÕâÒ»¸ö²»ÄÜÔÙ´Î²ÎÓëÆ¥ÅäÁË
+                    record[i] = true; //è¿™ä¸€ä¸ªä¸èƒ½å†æ¬¡å‚ä¸åŒ¹é…äº†
                     break;
                 }
             }
