@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_69_h__
-#define __leetcode_algorithm_69_h__
+#ifndef __leetcode_algorithm_00069_h__
+#define __leetcode_algorithm_00069_h__
 #include <cstdio>
 #include <cstdlib>
 using namespace std;
