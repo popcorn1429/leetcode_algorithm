@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_264_h_
-#define _leetcode_algorithm_264_h_
+#ifndef __leetcode_algorithm_00264_h__
+#define __leetcode_algorithm_00264_h__
 #include "basic_headers.h"
 
 using namespace std;
@@ -33,7 +33,7 @@ public:
         return ugly.back();
     }
 
-    //ÉÔÎ¢ÂıÒ»Ğ©£¬µ«Ò²Âú×ãÁËÒªÇó
+    //ç¨å¾®æ…¢ä¸€äº›ï¼Œä½†ä¹Ÿæ»¡è¶³äº†è¦æ±‚
     int nthUglyNumber__(int n)
     {
         set<int> numbers;
