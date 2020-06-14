@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_11_h_
-#define _leetcode_algorithm_11_h_
+#ifndef __leetcode_algorithm_00011_h__
+#define __leetcode_algorithm_00011_h__
 
 #include <vector>
 #include <iostream>
@@ -10,13 +10,13 @@ inline const T& getMin(const T& l, const T& r) {
     return l < r ? l : r;
 }
 
-//�����˼·����������ģ�height[0]�� height[n-1]��ɵľ���
-//         Ȼ����ȼ�һ������ height[0]��height[n-2]�ľ��Σ��� height[1]��height[n-1]�ľ���
-//         Ȼ������ټ�һ�������������ε����
-//         �Դ����ơ�
-//         ����Ҫ����ѭ����������ѭ������width��������Ҫѭ��ÿһ��ͬ�����ȵĸ�������[0]&[width],[1]&[width+1],...,[n-width-1]&[n-1]
+//最初的思路：先算最宽的（height[0]与 height[n-1]组成的矩形
+//         然后宽度减一，计算 height[0]与height[n-2]的矩形，和 height[1]与height[n-1]的矩形
+//         然后宽度再减一，计算三个矩形的面积
+//         以此类推。
+//         这需要两层循环，首先是循环宽度width，里面需要循环每一个同样宽度的各个矩形[0]&[width],[1]&[width+1],...,[n-width-1]&[n-1]
 //         
-//���˼·���������⵫��Ч�ʲ��У�����Ȼ��ȷ���ǲ���ͨ��ִ��ʱ�����ƣ����ܾ�
+//这个思路很容易理解但是效率不行，答案虽然正确但是不能通过执行时间限制，被拒绝
 int maxArea_m1(vector<int>& height) {
     const auto n = height.size();
     if (n <= 1)
@@ -27,19 +27,19 @@ int maxArea_m1(vector<int>& height) {
     int  cur_width = n - 1;
     int  last_max_height = 0;
 
-    //���ȴ����n-1���𽥱�С��ÿ��ѭ���ڣ����Ȳ��䣬�����߶�
+    //宽度从最大（n-1）逐渐变小，每层循环内，宽度不变，找最大高度
     while (cur_width > 0) {
         vector<int>::size_type start_pos = 0;
         decltype(start_pos) end_pos = n - cur_width;
         int max_height = 0;
-        //���ֵ�ǰ���ȣ������߶�
+        //保持当前宽度，找最大高度
         for (; start_pos < end_pos; ++start_pos) {
             const auto& cur_height = getMin(height[start_pos], height[start_pos + cur_width]);
             if (cur_height > max_height)
                 max_height = cur_height;
         }
 
-        //���ڿ��������𽥼�С�ģ�while�㣩�����Ե�ǰ�����߶ȱ�����ϴ�ѭ�������߶ȸ�����б�Ҫ�������
+        //由于宽度是在逐渐减小的（while层），所以当前的最大高度必须比上次循环的最大高度更大才有必要计算面积
         if (last_max_height < max_height) {
             last_max_height = max_height;
             int cur_area = max_height * cur_width;
@@ -47,20 +47,20 @@ int maxArea_m1(vector<int>& height) {
                 max_area = cur_area;
         }
 
-        //�´Σ����ȱ�С
+        //下次，宽度变小
         --cur_width;
     }
     return max_area;
 }
 
-//�ڶ���˼·����һ��λ��i�ĸ߶�height[i]��������Ǿ��εĸߣ���ζ����һ���߶ȱ�����ڵ�����
-//          ��������������vector����������һ����height[j],Ҫ�����height[j] >= height[i]
-//          ��Ȼ���j��i��ľ���Խ��Խ�ã���Ϊ�߶���height[i]�����ˣ�����Ϳ������������ˡ�
-//          ����ѡ��һ��i֮�󣬾ʹ���i��Զ��λ�ÿ�ʼ������������j��һ���ҵ��ͼ���һ�������Ȼ������j�������޸�i��ʼ��һ�ε�ѭ��
+//第二个思路：任一个位置i的高度height[i]，如果它是矩形的高，意味着另一个高度必须大于等于它
+//          现在我们在整个vector里面找另外一个高height[j],要求就是height[j] >= height[i]
+//          显然这个j跟i间的距离越大越好，因为高度是height[i]不变了，面积就靠宽度来提升了。
+//          所以选定一个i之后，就从离i最远的位置开始找满足条件的j，一旦找到就计算一下面积。然后不再找j，而是修改i开始下一次的循环
 //
-//���˼·Ҳ����������ģ����Ǵ���д����ͦ���ÿ���û�����˵�����Լ����������ˡ�
-//Ч����������Ŀ��Ҫ��ͨ���ˡ�
-//�����ύ֮���֣��������ⷨ��Ч����������ˡ�
+//这个思路也蛮容易理解的，但是代码写出来挺不好看，没有这段说明我自己都看不懂了。
+//效率满足了题目的要求通过了。
+//但是提交之后发现，跟主流解法的效率相比弱爆了。
 int maxArea_m2(vector<int>& height) {
     auto n = height.size();
     if (n < 2)
@@ -137,11 +137,11 @@ int maxArea_m2(vector<int>& height) {
     return max_area;
 }
 
-//���һ���ⷨ��Ҳ���Ǳ���д�����ĸ�Ч��ʵ��
-//           ˼·�ǣ�������ȡ���ֵ��������height[0]�� height[n-1]
-//           �϶̵ĸ����м俿£�����ϼ������
-//           �������������ڣ�Ȼ�������
-//           ��������С�������������
+//最后一个解法，也就是别人写出来的高效率实现
+//           思路是，宽度先取最大值，两个高height[0]和 height[n-1]
+//           较短的高向中间靠拢，不断计算面积
+//           最终两个高相邻，然后结束。
+//           宽在逐渐缩小，高在慢慢变大。
 int maxArea_m3(vector<int>& height) {
     int l = 0;
     int r = height.size() - 1;
