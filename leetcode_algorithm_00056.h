@@ -7,8 +7,8 @@ Example 2:
   Input: [[1,4],[4,5]]
   Output: [[1,5]]
 */
-#ifndef _leetcode_algorithm_56_h_
-#define _leetcode_algorithm_56_h_
+#ifndef _leetcode_algorithm_00056_h_
+#define _leetcode_algorithm_00056_h_
 #include "basic_headers.h"
 
 struct Interval {
@@ -63,4 +63,4 @@ public:
         b.end = tmp;
     }
 };
-#endif /*_leetcode_algorithm_56_h_*/
+#endif /*_leetcode_algorithm_00056_h_*/
