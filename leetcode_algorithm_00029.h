@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_29_h__
-#define __leetcode_algorithm_29_h__
+#ifndef __leetcode_algorithm_00029_h__
+#define __leetcode_algorithm_00029_h__
 #include <vector>
 using namespace std;
 class Solution {
