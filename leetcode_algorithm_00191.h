@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_191_h__
-#define __leetcode_algorithm_191_h__
+#ifndef __leetcode_algorithm_00191_h__
+#define __leetcode_algorithm_00191_h__
 #include "basic_headers.h"
 class Solution {
 public:
@@ -13,4 +13,4 @@ public:
         return weight;
     }
 };
-#endif /*__leetcode_algorithm_191_h__*/
+#endif /*__leetcode_algorithm_00191_h__*/
