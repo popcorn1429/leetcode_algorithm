@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_7_h_
-#define 
+#ifndef _leetcode_algorithm_00007_h_
+#define _leetcode_algorithm_00007_h_
 #include <iostream>
 using namespace std;
 
@@ -26,4 +26,4 @@ public:
     }
 };
 
-#endif /*_leetcode_algorithm_7_h_*/
+#endif /*_leetcode_algorithm_00007_h_*/
