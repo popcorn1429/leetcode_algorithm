@@ -9,8 +9,8 @@ Another corner case is the path might contain multiple slashes '/' together, suc
 In this case, you should ignore redundant slashes and return "/home/foo".
 
 */
-#ifndef _leetcode_algorithm_71_h_
-#define _leetcode_algorithm_71_h_
+#ifndef _leetcode_algorithm_00071_h_
+#define _leetcode_algorithm_00071_h_
 #include "basic_headers.h"
 
 class Solution {
