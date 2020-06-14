@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_49_h_
-#define _leetcode_algorithm_49_h_
+#ifndef _leetcode_algorithm_00049_h_
+#define _leetcode_algorithm_00049_h_
 #include <vector>
 #include <string>
 #include <algorithm>
