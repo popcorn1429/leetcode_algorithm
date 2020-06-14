@@ -32,8 +32,8 @@ The funny thing is, this question doesn't need to deal with octonary and
 hexadecimal.
 */
 
-#ifndef _leetcode_algorithm_65_h_
-#define _leetcode_algorithm_65_h_
+#ifndef _leetcode_algorithm_00065_h_
+#define _leetcode_algorithm_00065_h_
 #include "basic_headers.h"
 class Solution {
 public:
@@ -214,4 +214,4 @@ private:
             || ('a' <= c && c <= 'f');
     }
 };
-#endif /*_leetcode_algorithm_65_h_*/
+#endif /*_leetcode_algorithm_00065_h_*/
