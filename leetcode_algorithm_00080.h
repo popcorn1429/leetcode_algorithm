@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_80_h__
-#define __leetcode_algorithm_80_h__
+#ifndef __leetcode_algorithm_00080_h__
+#define __leetcode_algorithm_00080_h__
 
 #include "basic_headers.h"
 
