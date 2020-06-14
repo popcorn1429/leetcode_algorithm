@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_190_h__
-#define __leetcode_algorithm_190_h__
+#ifndef __leetcode_algorithm_00190_h__
+#define __leetcode_algorithm_00190_h__
 #include "basic_headers.h"
 
 class Solution {
