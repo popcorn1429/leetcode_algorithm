@@ -9,8 +9,8 @@ Example 2:
     Output: [[1,2],[3,10],[12,16]]
     Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 */
-#ifndef _leetcode_algorithm_57_h_
-#define _leetcode_algorithm_57_h_
+#ifndef _leetcode_algorithm_00057_h_
+#define _leetcode_algorithm_00057_h_
 #include "basic_headers.h"
 
 #ifndef min
@@ -75,4 +75,4 @@ public:
 
 
 
-#endif /*_leetcode_algorithm_57_h_*/
+#endif /*_leetcode_algorithm_00057_h_*/
