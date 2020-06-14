@@ -1,5 +1,5 @@
-#ifndef _leetcode_algorithm_5_h_
-#define _leetcode_algorithm_5_h_
+#ifndef _leetcode_algorithm_00005_h_
+#define _leetcode_algorithm_00005_h_
 /*
 Given a string s, find the longest palindromic substring in s.
 You may assume that the maximum length of s is 1000.
