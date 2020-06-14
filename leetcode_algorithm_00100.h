@@ -1,5 +1,5 @@
-#ifndef __leetcode_algorithm_100_h__
-#define __leetcode_algorithm_100_h__
+#ifndef __leetcode_algorithm_00100_h__
+#define __leetcode_algorithm_00100_h__
 
 struct TreeNode {
     int val;
